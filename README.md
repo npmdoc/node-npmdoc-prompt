@@ -1,11 +1,13 @@
-# api documentation for  [prompt (v1.0.0)](https://github.com/flatiron/prompt#readme)  [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-prompt.svg)](https://travis-ci.org/npmdoc/node-npmdoc-prompt)
+# api documentation for  [prompt (v1.0.0)](https://github.com/flatiron/prompt#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-prompt.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-prompt) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-prompt.svg)](https://travis-ci.org/npmdoc/node-npmdoc-prompt)
 #### A beautiful command-line prompt for node.js
 
 [![NPM](https://nodei.co/npm/prompt.png?downloads=true)](https://www.npmjs.com/package/prompt)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-prompt/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-prompt_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-prompt/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-prompt/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-prompt_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-prompt/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-prompt/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-prompt/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-prompt/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
