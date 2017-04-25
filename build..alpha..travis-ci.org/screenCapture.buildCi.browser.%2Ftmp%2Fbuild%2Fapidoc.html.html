@@ -450,7 +450,23 @@
 
   return valid.valid;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+//
+// Handle overrides here.
+// TODO: Make overrides nestable
+//
+if (prompt.override &amp;&amp; prompt.override[propName]) {
+  if (prompt.<span class="apidocCodeKeywordSpan">_performValidation</span>(name, prop, prompt.override, schema, -1, callback)) {
+    return callback(null, prompt.override[propName]);
+  }
+
+  delete prompt.override[propName];
+}
+
+//
+...</pre></li>
     </ul>
 
 
@@ -477,7 +493,22 @@
     history.splice(prompt.memory, history.length - prompt.memory);
   }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    //
+    // Log the resulting line, append this `property:value`
+    // pair to the history for `prompt` and respond to
+    // the callback.
+    //
+    logger.input(line.yellow);
+    prompt.<span class="apidocCodeKeywordSpan">_remember</span>(propName, line);
+    callback(null, line);
+
+    // Make sure `tmp` is emptied
+    tmp = [];
+  });
+};
+...</pre></li>
     </ul>
 
 
@@ -586,7 +617,23 @@ var prompt = require('prompt');
     callback(null, result.length===0);
   });
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    last[text] = {};
+    last = last[text];
+  }
+
+  last['responding with ' + message] = {
+    topic: function () {
+if(!mixin)
+  prompt.<span class="apidocCodeKeywordSpan">confirm</span>(options.prop, this.callback);
+else
+  prompt.confirm(options.prop, mixin, this.callback);
+
+if (!Array.isArray(options.response)) {
+  helpers.stdin.writeNextTick(options.response + '\n');
+}
+else {
+...</pre></li>
     </ul>
 
 
@@ -959,7 +1006,22 @@ var prompt = require('prompt');
 
         //
         // If the type is an array, wait for the end. Fixes #54 ...</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      });
+    }, function (err) {
+      return err ? done(err) : done(null, result);
+    });
+  }
+
+  iterate(schema, function get(target, next) {
+    prompt.<span class="apidocCodeKeywordSpan">getInput</span>(target, function (err, line) {
+      return err ? next(err) : next(null, line);
+    });
+  }, callback);
+
+  return prompt;
+};
+...</pre></li>
     </ul>
 
 
@@ -1030,7 +1092,19 @@ var prompt = require('prompt');
   prompt.paused = true;
   return prompt;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+prompt.get(['username', 'email'], function (err, result) {
+  //
+  // Log the results.
+  //
+  console.log('Command-line input received:');
+  console.log('  username: ' + result.username);
+  console.log('  email: ' + result.email);
+  prompt.<span class="apidocCodeKeywordSpan">pause</span>();
+})
+
+// $ node ./prompt-override.js --username USER --email EMAIL
+...</pre></li>
     </ul>
 
 
@@ -1052,7 +1126,23 @@ var prompt = require('prompt');
   prompt.paused = false;
   return prompt;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Resumes input coming in from stdin
+//
+prompt.resume = function () {
+  if (!prompt.started || !prompt.paused) {
+    return;
+  }
+
+  stdin.<span class="apidocCodeKeywordSpan">resume</span>();
+  prompt.emit('resume');
+  prompt.paused = false;
+  return prompt;
+};
+
+//
+// ### function history (search)
+...</pre></li>
     </ul>
 
 
@@ -1224,7 +1314,23 @@ prompt.<span class="apidocCodeKeywordSpan">stop</span>();
   var args = [level].concat(Array.prototype.slice.call(arguments));
   target.log.apply(target, args);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  }
+  catch (err) {
+    return (line !== -1) ? callback(err) : false;
+  }
+
+  if (!valid.valid) {
+    if (prop.schema.message) {
+logger.<span class="apidocCodeKeywordSpan">error</span>(prop.schema.message);
+    } else {
+msg = line !== -1 ? 'Invalid input for ' : 'Invalid command-line input for ';
+
+if (prompt.colors) {
+  logger.error(msg + name.grey);
+}
+else {
+...</pre></li>
     </ul>
 
 
@@ -1241,7 +1347,23 @@ prompt.<span class="apidocCodeKeywordSpan">stop</span>();
   var args = [level].concat(Array.prototype.slice.call(arguments));
   target.log.apply(target, args);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+//
+length = raw.join('').length;
+raw[0] = raw[0];
+msg = raw.join('');
+
+if (schema.help) {
+  schema.help.forEach(function (line) {
+    logger.<span class="apidocCodeKeywordSpan">help</span>(line);
+  });
+}
+
+//
+// Emit a "prompting" event
+//
+prompt.emit('prompt', prop);
+...</pre></li>
     </ul>
 
 
@@ -1258,7 +1380,23 @@ prompt.<span class="apidocCodeKeywordSpan">stop</span>();
   var args = [level].concat(Array.prototype.slice.call(arguments));
   target.log.apply(target, args);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  "When using prompt": {
+topic: function () {
+  //
+  // Reset the prompt for interactive testing
+  //
+  prompt.started = false;
+  prompt.start();
+  winston.<span class="apidocCodeKeywordSpan">info</span>('These prompt tests are interactive');
+  winston.info('Not following instructions will result in test failure');
+  return null;
+},
+"the getInput() method": {
+  "when passed a complex property with `hidden: true`": {
+    topic: function () {
+      winston.info('When prompted, enter: 12345 [backspace] [backspace] [enter]');
+...</pre></li>
     </ul>
 
 
@@ -1275,7 +1413,23 @@ prompt.<span class="apidocCodeKeywordSpan">stop</span>();
   var args = [level].concat(Array.prototype.slice.call(arguments));
   target.log.apply(target, args);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    }
+
+    //
+    // Log the resulting line, append this `property:value`
+    // pair to the history for `prompt` and respond to
+    // the callback.
+    //
+    logger.<span class="apidocCodeKeywordSpan">input</span>(line.yellow);
+    prompt._remember(propName, line);
+    callback(null, line);
+
+    // Make sure `tmp` is emptied
+    tmp = [];
+  });
+};
+...</pre></li>
     </ul>
 
 
